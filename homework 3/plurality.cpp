@@ -33,16 +33,43 @@ int getNumvoters(){
 }
 int main(void){
     int numVoters{getNumvoters()};
-    std::cout<<"Candidate names:";
     std::vector<Candidate>candidates{};
+        while(true){
+        std::cout<<"Candidate names:";
         std::string line;
-        std::getline(std::cin,line);
+        if(!std::getline(std::cin,line)){
+            return 1;
+        }
         std::istringstream iss(line);
         std::string name;
+        bool duplicate=false;
+        std::vector<Candidate> parse{};
         while(iss>>name){
-        candidates.emplace_back(name);
+            bool already=false;
+            for(const auto&c:parse){
+                if(c.getname()==name){
+                    already=true;
+                    break;
+                }
+            }
+            if(already){
+                duplicate=true;
+                break;
+            }
+            parse.emplace_back(name);
         }
-    for(int j=0;j<numVoters;j++){
+        if(parse.empty()){
+            std::cout<<"NO MEMBER INPUT"<<std::endl;
+            continue;
+        }
+        if(duplicate){
+            std::cout<<"YOU INPUT SAME CANDIDATE TWICE"<<std::endl;
+            continue;
+        }
+        candidates=std::move(parse);
+        break;
+        }
+        for(int j=0;j<numVoters;j++){
         std::cout<<"Vote:";
         std::string name;
         std::cin>>name;

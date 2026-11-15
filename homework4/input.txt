@@ -1,0 +1,14 @@
+A small renderer is a good place to learn how a program handles data. The renderer reads a
+scene file, builds a list of triangles, and then shoots a ray through every pixel of the image.
+Each ray walks over the triangles and keeps the closest hit. When the ray finds a closer hit,
+the renderer stores the distance and the triangle index. After the walk, the renderer shades the
+hit point with a simple lambert model. The lambert model needs a normal, a light, and a colour.
+A wrong normal makes the image dark, and a wrong distance makes the image noisy. Most bugs in a
+renderer are not about the math. Most bugs are about the data: a missing normal, a stale index,
+a shadow ray that starts inside the surface. The renderer does not know what a triangle means.
+It only knows numbers. That is why a good renderer keeps its data small and simple, and why a
+good test renders a single sphere before it renders a full scene. A sphere is easy to check by
+hand. The renderer writes every frame to a file, so a mistake in the shading code shows up as a
+dark pixel, and a mistake in the camera code shows up as a shifted image. Both are easy to see
+and hard to miss. A renderer that is easy to test is a renderer that is easy to fix. The same
+idea works for a word counter: count first, then sort, then print. Count, sort, print.

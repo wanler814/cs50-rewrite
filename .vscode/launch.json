@@ -1,18 +1,21 @@
 {
-    // 使用 IntelliSense 了解相关属性。 
-    // 悬停以查看现有属性的描述。
-    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+    // 两种调试方式，按项目类型选：
+    //   · 单文件程序（目录里还有别的 main）→ 用「调试当前文件」
+    //   · 多文件项目（如 plurality.cpp + candidate.cpp）→ 用「调试整个文件夹」
+    // console 设为 integratedTerminal：程序在「终端」里跑，键盘输入才有效。
+    // 注意：while (cin >> x) 这类循环需要 Ctrl+Z 再回车 才会结束。
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "C/C++: g++.exe 生成和调试活动文件",
+            "name": "C/C++: 调试当前文件（单文件）",
             "type": "cppdbg",
             "request": "launch",
             "program": "${fileDirname}\\${fileBasenameNoExtension}.exe",
-            "args": ["13"],
+            "args": [],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",
             "environment": [],
+            "console": "integratedTerminal",
             "externalConsole": false,
             "MIMode": "gdb",
             "miDebuggerPath": "C:\\mingw64\\bin\\gdb.exe",
@@ -23,8 +26,29 @@
                     "ignoreFailures": true
                 }
             ],
-            "preLaunchTask": "C/C++: g++.exe 生成活动文件"
+            "preLaunchTask": "C/C++: 编译当前文件"
+        },
+        {
+            "name": "C/C++: 调试整个文件夹（多文件）",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${fileDirname}\\${fileBasenameNoExtension}.exe",
+            "args": ["13"],
+            "stopAtEntry": false,
+            "cwd": "${fileDirname}",
+            "environment": [],
+            "console": "integratedTerminal",
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "miDebuggerPath": "C:\\mingw64\\bin\\gdb.exe",
+            "setupCommands": [
+                {
+                    "description": "为 gdb 启用整齐打印",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "C/C++: 编译当前文件夹全部 cpp"
         }
     ]
 }
-    
